@@ -1,8 +1,27 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.search .error, .search .warn, .search .ok {
+	display: none;
+}
+.error .error, .warn .warn, .ok .ok{
+	display: inline;
+}
+.error .search input {
+	background-color: tomato;
+}
+.warn .search input {
+	background-color: gold;
+}
+.ok .search input {
+	background-color: chartreuse;
+}
+
+#edit{
+	overflow: hidden;
+}
+form, .map {
+	float: left;
+	margin: 20px;
 }

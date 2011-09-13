@@ -1,0 +1,20 @@
+#edit
+	p.search
+		input(type='text', name='search')
+		span.error !
+		span.warn ?
+		span.ok ok
+	.map(style='width:300px;height:300px')
+
+	form(action='locations', method='post')
+		p
+			label lat:			
+				input(name='location[lat]')
+		p
+			label lon:
+				input(name='location[lon]')
+		p
+			label zoom:
+				input(name='location[zoom]')
+		p
+			input(type='submit')

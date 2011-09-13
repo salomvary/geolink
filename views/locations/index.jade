@@ -1,0 +1,5 @@
+ul
+  - each location in locations
+    li
+      a(href='/locations/'+location.id)
+        #{location.lat} #{location.lon}
