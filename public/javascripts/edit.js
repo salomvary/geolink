@@ -1,7 +1,14 @@
+app.Location = Backbone.Model.extend({
+	urlRoot: '/locations',
+	idAttribute: '_id'
+});
+
+
 app.Edit = Backbone.View.extend({
 	el: $('#edit'),
 	events: {
-		'keypress input[name=search]': 'search'
+		'keypress input[name=search]': 'search',
+		'submit':'save'
 	},
 	initialize: function() {
 		this.map = new google.maps.Map(this.$('.map')[0], {
@@ -12,6 +19,7 @@ app.Edit = Backbone.View.extend({
 		this.geocoder = new google.maps.Geocoder();
 		this.geocoded = $.proxy(this, 'geocoded');
 		this.form = this.$('form')[0];
+		this.location = new app.Location();
 	},
 	search: $.debounce(250, function(event) {
 		var val = $.trim($(event.target).val());
@@ -22,9 +30,9 @@ app.Edit = Backbone.View.extend({
 		}
 	}),
 	setForm: function(latlon) {
-		this.form['location[zoom]'].value = this.map.getZoom();
-		this.form['location[lat]'].value = latlon.lat();
-		this.form['location[lon]'].value = latlon.lng();
+		this.form['zoom'].value = this.map.getZoom();
+		this.form['lat'].value = latlon.lat();
+		this.form['lon'].value = latlon.lng();
 	},
 	geocoded: function(results, status) {
 		if(status == google.maps.GeocoderStatus.OK) {
@@ -49,6 +57,12 @@ app.Edit = Backbone.View.extend({
 			var geometry = results[0].geometry;
 			this.marker.setPosition(geometry.location);
 			this.map.fitBounds(geometry.viewport);
+			this.location.set({
+				lat: geometry.location.lat(),
+				lon: geometry.location.lng(),
+				zoom: this.map.getZoom()
+			});
+
 			this.setForm(geometry.location);
 		} else {
 			this.el
@@ -58,6 +72,10 @@ app.Edit = Backbone.View.extend({
 	},
 	dragged: function(event) {
 		this.setForm(event.latLng);
+	},
+	save: function() {
+		this.location.save();
+		return false;
 	}
 });
 

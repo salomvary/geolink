@@ -45,9 +45,30 @@ app.get('/', function(req, res) {
 });
 
 app.post('/locations', function(req, res) {
-	var location = new Location(req.body.location);
+	var location = new Location(req.body);
 	location.save(function(){
-		res.send('created '+location.lat +' '+ location.lon);
+		if(req.is('json')) {
+			res.send(location.toObject());
+		} else {
+			res.send('created '+location.lat +' '+ location.lon);
+		}
+	});
+});
+
+app.put('/locations/:id', function(req, res) {
+	Location.findById(req.params.id, function(err, location) {
+		if(location) {
+			location.lat = req.body.lat;
+			location.lat = req.body.lon;
+			location.lat = req.body.zoom;
+			location.save(function(err){
+				if(req.is('json')) {
+					res.send(location.toObject());
+				} else {
+					res.send('updated');
+				}
+			});
+		}
 	});
 });
 
