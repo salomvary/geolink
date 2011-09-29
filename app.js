@@ -24,6 +24,11 @@ app.configure('development', function(){
 	db = mongoose.connect('mongodb://localhost/geolink-development');
 });
 
+app.configure('test', function() {
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  db = mongoose.connect('mongodb://localhost/geolink-test');
+});
+
 app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
@@ -55,20 +60,19 @@ app.get('/locations', function(req, res) {
   });
 });
 
-app.post('/locations', function(req, res) {
-	var location = new Location(req.body.location);
-	location.save(function(){
-		res.send('created '+location.lat +' '+ location.lon);
-	});
-});
-
-app.get('/locations/:id', function(req, res) {
+app.get('/locations/:id.:format?', function(req, res) {
 	Location.findOne({_id: req.params.id}, function(err, location) {
 		if(location) {
-			res.render('locations/show', {
-        js:'show',
-        location: location
-      });
+			switch(req.params.format) {
+				case 'json':
+					res.send(location.toObject());
+					break;
+				default:
+					res.render('locations/show', {
+						js:'show',
+						location: location
+					});
+				}
 		} else {
 			res.send('not found');
 		}
