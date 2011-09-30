@@ -1,3 +1,4 @@
+
 app.Location = Backbone.Model.extend({
 	urlRoot: '/locations',
 	idAttribute: '_id'
@@ -11,12 +12,14 @@ app.Edit = Backbone.View.extend({
 		'submit':'save'
 	},
 	initialize: function() {
-		this.map = new google.maps.Map(this.$('.map')[0], {
-			zoom: 8,
-			center: new google.maps.LatLng(47.3, 19.5),
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		});
-		this.geocoder = new google.maps.Geocoder();
+		app.requireMaps($.proxy(function() {
+			this.map = new google.maps.Map(this.$('.map')[0], {
+				zoom: 8,
+				center: new google.maps.LatLng(47.3, 19.5),
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			});
+			this.geocoder = new google.maps.Geocoder();
+		}, this));
 		this.geocoded = $.proxy(this, 'geocoded');
 		this.form = this.$('form')[0];
 		this.location = new app.Location();
@@ -78,3 +81,4 @@ app.Edit = Backbone.View.extend({
 		return false;
 	}
 });
+
