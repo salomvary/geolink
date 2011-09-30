@@ -9,7 +9,3 @@ app.Show = Backbone.View.extend({
 		});
 	}
 });
-
-$(function() {
-	app.show = new app.Show();
-});

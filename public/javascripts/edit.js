@@ -78,9 +78,3 @@ app.Edit = Backbone.View.extend({
 		return false;
 	}
 });
-
-
-$(function() {
-	app.edit = new app.Edit();
-});
-
