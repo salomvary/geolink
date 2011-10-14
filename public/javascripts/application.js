@@ -6,8 +6,7 @@ require([
 	'order!http://code.jquery.com/jquery-1.6.3.js', 
 	'order!underscore', 
 	'order!backbone', 
-	'order!jquery.ba-throttle-debounce', 
-	'https://www.google.com/jsapi'], 
+	'order!jquery.ba-throttle-debounce'], 
 function() {
 
 	app.router = new (Backbone.Router.extend({
