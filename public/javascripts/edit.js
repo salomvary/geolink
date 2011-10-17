@@ -9,13 +9,11 @@ app.Location = Backbone.Model.extend({
 app.Edit = Backbone.View.extend({
 	el: $('#edit'),
 	events: {
-		'keyup input[name=search]': 'search',
-		'submit':'save'
+		'keyup input[name=search]': 'search'
 	},
 	initialize: function() {
 		this.geocoded = $.proxy(this, 'geocoded');
 		this.form = this.$('form')[0];
-		this.location = new app.Location();
 		this.map = new Map({el: this.$('.map')[0]});
 		this.geocoder = new google.maps.Geocoder();
 	},
@@ -27,11 +25,6 @@ app.Edit = Backbone.View.extend({
 			this.el.removeClass('error warn ok');
 		}
 	}),
-	setForm: function(latlon) {
-		this.form['zoom'].value = this.map.map.getZoom();
-		this.form['lat'].value = latlon.lat();
-		this.form['lon'].value = latlon.lng();
-	},
 	geocoded: function(results, status) {
 		if(status == google.maps.GeocoderStatus.OK) {
 			if(results.length == 1) {
@@ -49,31 +42,30 @@ app.Edit = Backbone.View.extend({
 					draggable: true
 				});
 				google.maps.event.addListener(this.marker, 'dragend',
-					$.proxy(this, 'dragged'));
+					$.proxy(this, 'save'));
 
 			}
 			var geometry = results[0].geometry;
 			this.marker.setPosition(geometry.location);
 			this.map.map.fitBounds(geometry.viewport);
-			this.location.set({
-				lat: geometry.location.lat(),
-				lon: geometry.location.lng(),
-				zoom: this.map.map.getZoom()
-			});
-
-			this.setForm(geometry.location);
+			if(! this.location) {
+				this.location = new app.Location();
+			}
+			this.save();
 		} else {
 			this.el
 				.removeClass('warn ok')
 				.addClass('error');
 		}
 	},
-	dragged: function(event) {
-		this.setForm(event.latLng);
-	},
 	save: function() {
+		var position = this.marker.getPosition();
+		this.location.set({
+			lat: position.lat(),
+			lon: position.lng(),
+			zoom: this.map.map.getZoom()
+		});
 		this.location.save();
-		return false;
 	}
 });
 
