@@ -59,8 +59,8 @@ app.put('/locations/:id', function(req, res) {
 	Location.findById(req.params.id, function(err, location) {
 		if(location) {
 			location.lat = req.body.lat;
-			location.lat = req.body.lon;
-			location.lat = req.body.zoom;
+			location.lon = req.body.lon;
+			location.zoom = req.body.zoom;
 			location.save(function(err){
 				if(req.is('json')) {
 					res.send(location.toObject());
