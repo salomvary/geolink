@@ -9,7 +9,7 @@ app.Location = Backbone.Model.extend({
 app.Edit = Backbone.View.extend({
 	el: $('#edit'),
 	events: {
-		'keypress input[name=search]': 'search',
+		'keyup input[name=search]': 'search',
 		'submit':'save'
 	},
 	initialize: function() {
