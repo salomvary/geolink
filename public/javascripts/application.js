@@ -31,7 +31,3 @@ function() {
 	});
 
 });
-
-app.requireMaps = function(callback) {
-	google.load("maps", "3", {other_params: "sensor=false", callback : callback});
-};
