@@ -1,21 +1,12 @@
 #edit
-	p.search.topbox
-		input(type='text', name='search')
-		span.error !
-		span.warn ?
-		span.ok ok
+	form.search.topbox
+		p
+			input(type='text', name='search', 
+				placeholder='Start typing address...')
+			span.error !
+			span.warn ?
+			span.ok ok
+		p
+			input(type='text', name='url')
 
 	.map.fullscreen
-
-	form(action='locations', method='post')
-		p
-			label lat:			
-				input(name='lat')
-		p
-			label lon:
-				input(name='lon')
-		p
-			label zoom:
-				input(name='zoom')
-		p
-			input(type='submit')

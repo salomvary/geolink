@@ -26,6 +26,9 @@ function() {
 		}
 	}));
 
+	app.baseUrl = window.location.protocol + '//'
+		+ window.location.host;
+
 	$(function() {
 		Backbone.history.start({pushState: true});
 	});

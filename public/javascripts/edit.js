@@ -13,9 +13,13 @@ app.Edit = Backbone.View.extend({
 	},
 	initialize: function() {
 		this.geocoded = $.proxy(this, 'geocoded');
-		this.form = this.$('form')[0];
 		this.map = new Map({el: this.$('.map')[0]});
 		this.geocoder = new google.maps.Geocoder();
+		this.input = this.$('input[name=search]');
+		this.url = this.$('input[name=url]');
+
+		this.input.focus();
+		new SelectAll({el: this.url});
 	},
 	search: $.debounce(250, function(event) {
 		var val = $.trim($(event.target).val());
@@ -65,7 +69,26 @@ app.Edit = Backbone.View.extend({
 			lon: position.lng(),
 			zoom: this.map.map.getZoom()
 		});
-		this.location.save();
+		this.location.save(null, {
+			success: $.proxy(this, 'saved')
+		})
+	},
+	saved: function(model, resp, xhr) {
+		this.url.val(
+			app.baseUrl + '/locations/' + model.id);
+	}
+});
+
+var SelectAll = Backbone.View.extend({
+	events: {
+		'focus': 'select',
+		'click': 'select'
+	},
+	select: function(e) {
+		e.target.focus();
+		setTimeout(function() {
+			e.target.select();
+		}, 1);
 	}
 });
 

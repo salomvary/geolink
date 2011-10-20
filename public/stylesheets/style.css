@@ -21,12 +21,6 @@ body {
 #edit{
 	overflow: hidden;
 }
-form {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	background: white;
-}
 
 .topbox{
 	background: #268bd2;
@@ -35,11 +29,15 @@ form {
 	left: 50%;
 	width: 300px;	
 	margin: 0 0 0 -160px;
-	padding: 10px;
+	padding: 0 10px;
 	border-radius: 0 0 15px 15px;
 	color: #e4e4e4;
 	box-shadow: 0 0 15px #000;
 	z-index:1;
+}
+
+.topbox input{
+	width: 200px;
 }
 
 .map.fullscreen{
