@@ -1,12 +1,11 @@
 #edit
-	form.search.topbox
-		p
-			input(type='text', name='search', 
-				placeholder='Start typing address...')
-			span.error !
-			span.warn ?
-			span.ok ok
-		p
-			input(type='text', name='url')
+	form.search.leftbox
+		.input
+			input#search(type='text', name='search', 
+				placeholder='Start typing an address')
+			label(for='search')
+		.input.url(style='display:none')
+			input(type='text', name='url', readonly='readonly')
+			label(for='url')
 
 	.map.fullscreen

@@ -16,9 +16,10 @@ app.Edit = Backbone.View.extend({
 		this.map = new Map({el: this.$('.map')[0]});
 		this.geocoder = new google.maps.Geocoder();
 		this.input = this.$('input[name=search]');
+		this.hint = this.$('.input label[for=search]');
 		this.url = this.$('input[name=url]');
+		this.urlContainer = this.$('.input.url').hide();
 
-		this.input.focus();
 		new SelectAll({el: this.url});
 	},
 	search: $.debounce(250, function(event) {
@@ -26,19 +27,26 @@ app.Edit = Backbone.View.extend({
 		if(val.length) {
 			this.geocoder.geocode({address: val}, this.geocoded);
 		} else {
-			this.el.removeClass('error warn ok');
+			this.input.removeClass('error warn ok');
+			this.hint.hide();
 		}
 	}),
 	geocoded: function(results, status) {
 		if(status == google.maps.GeocoderStatus.OK) {
 			if(results.length == 1) {
-				this.el
+				this.input
 					.removeClass('warn error')
 					.addClass('ok');
+				this.hint.html('<b>☺</b> We found it!')
+					.show();
+				this.urlContainer.show();
 			} else {
-				this.el
+				this.input
 					.removeClass('error ok')
 					.addClass('warn');
+				this.hint.html('<b>☺</b> We found more than one!')
+					.show();
+				this.urlContainer.show();
 			}
 			if(! this.marker) {
 				this.marker = new google.maps.Marker({
@@ -57,9 +65,11 @@ app.Edit = Backbone.View.extend({
 			}
 			this.save();
 		} else {
-			this.el
+			this.input
 				.removeClass('warn ok')
 				.addClass('error');
+			this.hint.html('<b>☹</b> Nothing found, try something else')
+				.show();
 		}
 	},
 	save: function() {

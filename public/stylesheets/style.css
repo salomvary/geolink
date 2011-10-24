@@ -1,43 +1,28 @@
 body {
-  font: 14px Arial, sans-serif;
+	font-size: 13px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.search .error, .search .warn, .search .ok {
-	display: none;
+input.error {
+	background-color: #FDDFDE;
 }
-.error .error, .warn .warn, .ok .ok{
-	display: inline;
+input.warn {
+	background-color: #FDF5D9;
 }
-.error .search input {
-	background-color: tomato;
-}
-.warn .search input {
-	background-color: gold;
-}
-.ok .search input {
-	background-color: chartreuse;
+input.ok {
+	background-color: #D1EED1;
 }
 
-#edit{
-	overflow: hidden;
-}
-
-.topbox{
+.leftbox{
 	background: #268bd2;
 	position: absolute;
 	top: 0;
-	left: 50%;
-	width: 300px;	
-	margin: 0 0 0 -160px;
-	padding: 0 10px;
-	border-radius: 0 0 15px 15px;
+	left: 0;
+	padding: 0 18px;
+	border-radius: 0 0 15px 0;
 	color: #e4e4e4;
 	box-shadow: 0 0 15px #000;
 	z-index:1;
-}
-
-.topbox input{
-	width: 200px;
 }
 
 .map.fullscreen{
@@ -46,4 +31,31 @@ body {
 	width: 100%;
 	height: 100%;
 	position: absolute;
+}
+
+/* form elements */
+.input{
+	margin: 18px 0;
+	clear: both;
+	overflow: hidden;
+}
+input{
+	height: 18px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 4px;
+	font-size: 13px;
+	outline: none;
+}
+.input label{
+	display: block;
+	font-size: 11px;
+	position: fixed;
+}
+
+.search input{
+	width: 300px;
+}
+.url input{
+	font-weight: bold;
 }
