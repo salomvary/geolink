@@ -29,6 +29,7 @@ app.configure('test', function() {
 });
 
 app.configure('production', function(){
+  db = mongoose.connect('mongodb://localhost/geolink');
 });
 
 Location = require('./models.js').Location(db);
