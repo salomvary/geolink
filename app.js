@@ -100,9 +100,11 @@ app.get('/locations/:id.:format?', loadLocation, function(req, res) {
 		}
 });
 
-app.all('/*', function() {
+/*
+app.get('/*', function() {
 	throw new NotFound;
 });
+*/
 
 // error handling
 function NotFound(msg) {
@@ -112,7 +114,6 @@ function NotFound(msg) {
 sys.inherits(NotFound, Error);
 
 app.error(function(err, req, res, next) {
-	console.log('error caught', err);
 	if (err instanceof NotFound) {
 		if(req.accepts('html')) {
 			res.render('404', {error: err, status: 404});
