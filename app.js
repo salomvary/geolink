@@ -34,16 +34,16 @@ app.configure('production', function(){
 
 Location = require('./models.js').Location(db);
 
-function loadLocation(req, res, next) {
-	Location.findById(req.params.id, function(err, location) {
+app.param(':locationId', function(req, res, next, id) {
+	Location.findById(id, function(err, location) {
 		if(location) {
 			req.location = location;
 			next();
 		} else {
-			throw new NotFound('Location ('+req.params.id+') not found');
+			throw new NotFound('Location ('+id+') not found');
 		}
 	});
-}
+});
 
 // Routes
 app.get('/', function(req, res) {
@@ -64,7 +64,7 @@ app.post('/locations', function(req, res) {
 	});
 });
 
-app.put('/locations/:id', loadLocation, function(req, res) {
+app.put('/locations/:locationId', function(req, res) {
 	var location = req.location;
 	location.lat = req.body.lat;
 	location.lon = req.body.lon;
@@ -87,7 +87,7 @@ app.get('/locations', function(req, res) {
   });
 });
 
-app.get('/locations/:id.:format?', loadLocation, function(req, res) {
+app.get('/locations/:locationId.:format?', function(req, res) {
 	var location = req.location;
 	switch(req.params.format) {
 		case 'json':
