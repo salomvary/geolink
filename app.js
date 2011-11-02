@@ -48,7 +48,6 @@ app.param(':locationId', function(req, res, next, id) {
 // Routes
 app.get('/', function(req, res) {
   res.render('locations/create', {
-    js: 'edit',
     title: 'Express'
   });
 });
@@ -81,7 +80,6 @@ app.put('/locations/:locationId', function(req, res) {
 app.get('/locations', function(req, res) {
 	Location.find({}, function(err, locations) {
     res.render('locations/index', {
-      js: null,//FIXME
       locations: locations
     });
   });
@@ -95,7 +93,6 @@ app.get('/:locationId.:format?', function(req, res) {
 			break;
 		default:
 			res.render('locations/show', {
-				js:'show',
 				location: location
 			});
 		}
