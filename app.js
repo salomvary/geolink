@@ -40,7 +40,7 @@ app.param(':locationId', function(req, res, next, id) {
 			req.location = location;
 			next();
 		} else {
-			throw new NotFound('Location ('+id+') not found');
+			next(new NotFound('Location ('+id+') not found'));
 		}
 	});
 });
@@ -63,7 +63,7 @@ app.post('/', function(req, res) {
 	});
 });
 
-app.put('/locations/:locationId', function(req, res) {
+app.put('/:locationId', function(req, res) {
 	var location = req.location;
 	location.lat = req.body.lat;
 	location.lon = req.body.lon;
