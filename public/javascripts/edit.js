@@ -1,7 +1,7 @@
 define(['map'], function(Map) {
 
 app.Location = Backbone.Model.extend({
-	urlRoot: '/locations',
+	urlRoot: '/',
 	idAttribute: '_id'
 });
 
@@ -85,7 +85,7 @@ app.Edit = Backbone.View.extend({
 	},
 	saved: function(model, resp, xhr) {
 		this.url.val(
-			app.baseUrl + '/locations/' + model.id);
+			app.baseUrl + this.location.urlRoot + model.id);
 	}
 });
 

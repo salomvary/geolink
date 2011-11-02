@@ -53,7 +53,7 @@ app.get('/', function(req, res) {
   });
 });
 
-app.post('/locations', function(req, res) {
+app.post('/', function(req, res) {
 	var location = new Location(req.body);
 	location.save(function(){
 		if(req.is('json')) {
@@ -87,7 +87,7 @@ app.get('/locations', function(req, res) {
   });
 });
 
-app.get('/locations/:locationId.:format?', function(req, res) {
+app.get('/:locationId.:format?', function(req, res) {
 	var location = req.location;
 	switch(req.params.format) {
 		case 'json':

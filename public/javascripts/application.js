@@ -11,8 +11,8 @@ function() {
 
 	app.router = new (Backbone.Router.extend({
 		routes: {
-			'':               'edit',
-			'locations/:id':  'show'
+			'':         'edit',
+			':id':      'show'
 		},
 		edit: function() {
 			require(['edit'], function() {
