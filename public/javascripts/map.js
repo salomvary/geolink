@@ -19,11 +19,20 @@ var Map = Backbone.View.extend({
 		} else {
 			center = this.defaultLocation;
 		}
-		this.map = new google.maps.Map(container[0], {
+		var mapOptions =  {
 			zoom: (options.center && options.center.zoom) ? options.center.zoom :  8,
 			center: center,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
-		});
+		};
+		if(options.controlsToRight) {
+			$.extend(mapOptions, {
+				panControl: false,
+				zoomControlOptions: {
+					position: google.maps.ControlPosition.RIGHT_TOP
+				}
+			});
+		}
+		this.map = new google.maps.Map(container[0], mapOptions);
 		if(options.marker) {
 			this.marker = new google.maps.Marker({
 				map: this.map

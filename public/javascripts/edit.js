@@ -13,7 +13,7 @@ app.Edit = Backbone.View.extend({
 	},
 	initialize: function() {
 		this.geocoded = $.proxy(this, 'geocoded');
-		this.map = new Map({el: this.$('.map')[0]});
+		this.map = new Map({el: this.$('.map')[0], controlsToRight: true});
 		this.geocoder = new google.maps.Geocoder();
 		this.input = this.$('input[name=search]');
 		this.hint = this.$('.input label[for=search]');
