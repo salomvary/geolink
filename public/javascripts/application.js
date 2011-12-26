@@ -1,7 +1,3 @@
-var app = {};
-
-//FIXME json2
-
 require([
 	'order!http://code.jquery.com/jquery-1.6.3.js', 
 	'order!underscore', 
@@ -9,28 +5,26 @@ require([
 	'order!jquery.ba-throttle-debounce'], 
 function() {
 
-	app.router = new (Backbone.Router.extend({
-		routes: {
-			'':         'edit',
-			':id':      'show'
-		},
-		edit: function() {
-			require(['edit'], function() {
-				app.edit = new app.Edit();
-			});
-		},
-		show: function(id) {
-			require(['show'], function() {
-				app.show = new app.Show();
-			});
-		}
-	}));
+var router = new (Backbone.Router.extend({
+	routes: {
+		'':         'edit',
+		':id':      'show'
+	},
+	edit: function() {
+		require(['edit'], function(Edit) {
+			var edit = new Edit();
+		});
+	},
+	show: function(id) {
+		require(['show'], function(Show) {
+			var show = new Show();
+		});
+	}
+}));
 
-	app.baseUrl = window.location.protocol + '//'
-		+ window.location.host;
 
-	$(function() {
-		Backbone.history.start({pushState: true});
-	});
+$(function() {
+	Backbone.history.start({pushState: true});
+});
 
 });

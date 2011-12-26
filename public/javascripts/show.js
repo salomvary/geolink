@@ -1,6 +1,6 @@
 define(['map'], function(Map) {
 
-app.Show = Backbone.View.extend({
+var Show = Backbone.View.extend({
 	el: $('#show'),
 	initialize: function() {
 		var data = this.el.data();
@@ -11,5 +11,7 @@ app.Show = Backbone.View.extend({
 		});
 	}
 });
+
+return Show;
 
 });

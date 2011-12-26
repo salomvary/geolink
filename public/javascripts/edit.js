@@ -1,12 +1,12 @@
-define(['map'], function(Map) {
+define(['map','util'], function(Map, util) {
 
-app.Location = Backbone.Model.extend({
+var Location = Backbone.Model.extend({
 	urlRoot: '/',
 	idAttribute: '_id'
 });
 
 
-app.Edit = Backbone.View.extend({
+var Edit = Backbone.View.extend({
 	el: $('#edit'),
 	events: {
 		'keyup input[name=search]': 'search'
@@ -61,7 +61,7 @@ app.Edit = Backbone.View.extend({
 			this.marker.setPosition(geometry.location);
 			this.map.map.fitBounds(geometry.viewport);
 			if(! this.location) {
-				this.location = new app.Location();
+				this.location = new Location();
 			}
 			this.save();
 		} else {
@@ -85,7 +85,7 @@ app.Edit = Backbone.View.extend({
 	},
 	saved: function(model, resp, xhr) {
 		this.url.val(
-			app.baseUrl + this.location.urlRoot + model.id);
+			util.baseUrl + this.location.urlRoot + model.id);
 	}
 });
 
@@ -101,5 +101,7 @@ var SelectAll = Backbone.View.extend({
 		}, 1);
 	}
 });
+
+return Edit;
 
 });
