@@ -1,4 +1,5 @@
-define(['google!maps/3/sensor=false'], function() {
+define(['jquery', 'backbone', 'google!maps/3/sensor=false'], 
+function($, Backbone) {
 
 var Map = Backbone.View.extend({
 

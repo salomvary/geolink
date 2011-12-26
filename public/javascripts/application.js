@@ -1,9 +1,10 @@
-require([
-	'order!http://code.jquery.com/jquery-1.6.3.js', 
-	'order!underscore', 
-	'order!backbone', 
-	'order!jquery.ba-throttle-debounce'], 
-function() {
+require.config({
+	paths: {
+		jquery: 'http://code.jquery.com/jquery-1.7.1'
+	}
+});
+
+require(['backbone'], function(Backbone) {
 
 var router = new (Backbone.Router.extend({
 	routes: {
