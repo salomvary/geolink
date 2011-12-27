@@ -1,4 +1,4 @@
-define(['jquery', 'backbone', 'map'], 
+define(['jquery', 'lib/backbone', 'map'], 
 function($, Backbone, Map) {
 
 var Show = Backbone.View.extend({

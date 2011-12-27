@@ -1,5 +1,5 @@
-define(['jquery', 'backbone', 'map','util', 
-'order!jquery.ba-throttle-debounce'], function($, Backbone, Map, util) {
+define(['jquery', 'lib/backbone', 'map','util', 
+'lib/jquery.ba-throttle-debounce'], function($, Backbone, Map, util) {
 
 var Location = Backbone.Model.extend({
 	urlRoot: '/',

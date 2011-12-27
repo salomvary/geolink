@@ -1,10 +1,11 @@
 require.config({
 	paths: {
-		jquery: 'http://code.jquery.com/jquery-1.7.1'
+		jquery: 'http://code.jquery.com/jquery-1.7.1',
+		underscore: 'lib/underscore' //backbone.js refers to it
 	}
 });
 
-require(['backbone'], function(Backbone) {
+require(['lib/backbone', 'lib/underscore'], function(Backbone) {
 
 var router = new (Backbone.Router.extend({
 	routes: {
