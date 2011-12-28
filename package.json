@@ -9,7 +9,7 @@
 		"requirejs": "1.0.x"
 	},
 	"scripts": {
-		"prestart": "r.js -o app.build.js",
+		"prestart": "rm -rf public/optimized; r.js -o app.build.js",
 		"start": "node app.js"
 	}
 }
