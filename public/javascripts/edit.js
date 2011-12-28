@@ -82,7 +82,7 @@ var Edit = Backbone.View.extend({
 		});
 		this.location.save(null, {
 			success: $.proxy(this, 'saved')
-		})
+		});
 	},
 	saved: function(model, resp, xhr) {
 		this.url.val(

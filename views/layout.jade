@@ -2,7 +2,8 @@
 html
 	head
 		title geolink
-		link(rel='stylesheet', href='/stylesheets/style.css')
-		script(src='/javascripts/lib/require.js', 
-			data-main='/javascripts/application')
+		link(rel='stylesheet', 
+			href=(optimized ? '/optimized' : '')+'/stylesheets/style.css')
+		script(src=(optimized ? '/optimized' : '')+'/javascripts/lib/require.js', 
+			data-main=(optimized ? '/optimized' : '')+'/javascripts/application')
 	body!= body

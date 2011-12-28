@@ -5,7 +5,7 @@ require.config({
 	}
 });
 
-require(['lib/backbone', 'lib/underscore'], function(Backbone) {
+require(['jquery', 'lib/backbone'], function($, Backbone) {
 
 var router = new (Backbone.Router.extend({
 	routes: {

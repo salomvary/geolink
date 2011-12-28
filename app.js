@@ -7,7 +7,8 @@ var express = require('express'),
 	mongoose = require('mongoose'),
 	sys = require('sys'),	
 	db, Location,
-	app = module.exports = express.createServer();
+	app = module.exports = express.createServer(),
+	optimized = false;
 
 // Configuration
 
@@ -30,6 +31,7 @@ app.configure('test', function() {
 
 app.configure('production', function(){
   db = mongoose.connect('mongodb://localhost/geolink');
+	optimized = true;
 });
 
 Location = require('./models.js').Location(db);
@@ -43,6 +45,17 @@ app.param(':locationId', function(req, res, next, id) {
 			next(new NotFound('Location ('+id+') not found'));
 		}
 	});
+});
+
+app.all('/*', function(req, res, next) {
+	var useOptimized = optimized;
+	if(useOptimized && req.query.optimized === 'false') {
+		useOptimized = false;
+	} else if(! useOptimized && req.query.optimized === 'true') {
+		useOptimized = true;
+	}
+	res.local('optimized', useOptimized);
+	next();
 });
 
 // Routes
