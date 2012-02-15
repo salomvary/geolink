@@ -100,22 +100,14 @@ app.get('/locations', function(req, res) {
 
 app.get('/:locationId.:format?', function(req, res) {
 	var location = req.location;
-	switch(req.params.format) {
-		case 'json':
-			res.send(location.toObject());
-			break;
-		default:
-			res.render('locations/show', {
-				location: location
-			});
-		}
+	if(req.params.format === 'json') {
+		res.send(location.toObject());
+	} else {
+		res.render('locations/show', {
+			location: location
+		});
+	}
 });
-
-/*
-app.get('/*', function() {
-	throw new NotFound;
-});
-*/
 
 // error handling
 function NotFound(msg) {

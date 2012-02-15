@@ -38,14 +38,14 @@ var Edit = Backbone.View.extend({
 				this.input
 					.removeClass('warn error')
 					.addClass('ok');
-				this.hint.html('<b>☺</b> We found it!')
+				this.hint.html('<b>\u263A</b> We found it!')
 					.show();
 				this.urlContainer.show();
 			} else {
 				this.input
 					.removeClass('error ok')
 					.addClass('warn');
-				this.hint.html('<b>☺</b> We found more than one!')
+				this.hint.html('<b>\u263A</b> We found more than one!')
 					.show();
 				this.urlContainer.show();
 			}
@@ -69,7 +69,7 @@ var Edit = Backbone.View.extend({
 			this.input
 				.removeClass('warn ok')
 				.addClass('error');
-			this.hint.html('<b>☹</b> Nothing found, try something else')
+			this.hint.html('<b>\u2639</b> Nothing found, try something else')
 				.show();
 		}
 	},

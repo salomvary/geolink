@@ -22,7 +22,7 @@ var router = new (Backbone.Router.extend({
 			var show = new Show();
 		});
 	}
-}));
+}))();
 
 
 $(function() {
