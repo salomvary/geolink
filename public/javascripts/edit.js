@@ -1,5 +1,5 @@
 define(['jquery', 'lib/backbone', 'map','util', 
-'lib/jquery.ba-throttle-debounce'], function($, Backbone, Map, util) {
+'underscore'], function($, Backbone, Map, util, _) {
 
 var Location = Backbone.Model.extend({
 	urlRoot: '/',
@@ -23,7 +23,7 @@ var Edit = Backbone.View.extend({
 
 		new SelectAll({el: this.url});
 	},
-	search: $.debounce(250, function(event) {
+	search: _.debounce(function(event) {
 		var val = $.trim($(event.target).val());
 		if(val.length) {
 			this.geocoder.geocode({address: val}, this.geocoded);
@@ -31,7 +31,7 @@ var Edit = Backbone.View.extend({
 			this.input.removeClass('error warn ok');
 			this.hint.hide();
 		}
-	}),
+	}, 250),
 	geocoded: function(results, status) {
 		if(status == google.maps.GeocoderStatus.OK) {
 			if(results.length == 1) {
