@@ -5,7 +5,7 @@ require.config({
 	}
 });
 
-require(['jquery', 'lib/backbone'], function($, Backbone) {
+require(['jquery', 'lib/backbone', 'lib/hideaddrbar'], function($, Backbone) {
 
 var router = new (Backbone.Router.extend({
 	routes: {
