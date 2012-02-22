@@ -3,9 +3,9 @@
 	baseUrl: 'javascripts',
 	dir: 'public/optimized',
 	optimizeCss: 'standard',
+	mainConfigFile: 'public/javascripts/application.js',
 	paths: {
-		jquery: 'empty:',
-		underscore: 'lib/underscore'
+		jquery: 'empty:'
 	},
 	modules: [
 		{
